@@ -1,0 +1,31 @@
+{
+  "name": "@revbits/pam-secretman-js-plugin",
+  "version": "1.0.0",
+  "description": "RevBits PAM Secret Manager JavaScript Plugin",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "mocha",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@www.revbits.co:ENPAST-WEB/revbits-pam-javascript-sdk.git"
+  },
+  "keywords": [],
+  "author": "RevBits",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "mocha": "^10.2.0"
+  }
+}
