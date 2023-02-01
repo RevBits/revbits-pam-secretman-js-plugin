@@ -1,17 +1,28 @@
-var pamClient = require('../dist/index');
-var assert = require('assert');
+const expect = require('chai').expect;
 
-describe('revbits-pam-azure-plugin', function () {
+const { generateSecret } = require('../dist/generate-secret');
 
-  it('should throw an error for an undefined value', function() {
-    assert.throws(async function() {
-        await pamClient.generateSecret(undefined,undefined,undefined);
-    });
-  });
+describe('generateSecret', () => {
+  it('throws an error if hostName, secretKey, or apiKey is missing', async () => {
+    try {
+      await generateSecret(null, 'secretKey', 'apiKey');
+    } catch (error) {
+      expect(error.type).to.equal('REQUIRED_FIELD');
+      expect(error.message).to.equal('hostName is required.');
+    }
 
-  it('should throw an error for `null`', function() {
-    assert.throws(async function() {
-        await pamClient.generateSecret(null,null,null);
-    });
+    try {
+      await generateSecret('hostName', null, 'apiKey');
+    } catch (error) {
+      expect(error.type).to.equal('REQUIRED_FIELD');
+      expect(error.message).to.equal('secretKey is required.');
+    }
+
+    try {
+      await generateSecret('hostName', 'secretKey', null);
+    } catch (error) {
+      expect(error.type).to.equal('REQUIRED_FIELD');
+      expect(error.message).to.equal('apiKey is required.');
+    }
   });
 });
